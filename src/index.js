@@ -1,13 +1,9 @@
 
-import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
+import { app } from "./app.js";
 
 dotenv.config();
-const app = express();
-
-// Use middleware if needed
-app.use(express.json());
 
 connectDB()
   .then(() => {

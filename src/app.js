@@ -16,6 +16,14 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 
+//routes import
+import userRouter from "./routes/user.routes.js";
+
+
+
+//routes declaration
+app.use("/api/v1/users",userRouter); //URL_ADDRESS:8000/user ke badde userRouter ka code chalega aur uske andar wale routes bhi chalega like /register , /login etc.
+
 
 
 export {app};
