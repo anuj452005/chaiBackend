@@ -25,7 +25,7 @@ const UserSchema = new Schema(
       trim: true,
       index: true, // Create an index on the field for faster querying
     },
-     password: {
+    password: {
       type: String,
       required: [true, "Password is required"], // Password is required
     },
@@ -42,7 +42,7 @@ const UserSchema = new Schema(
         ref: "Video", // Reference to the Vedio model
       },
     ],
-   
+
     refreshToken: {
       type: String,
     },
@@ -60,10 +60,12 @@ UserSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 10);
   next();
 });
+
 UserSchema.methods.isPasswordCorrect = async function (password) {
   //
   return await bcrypt.compare(password, this.password); // compare the password with the hashed password . it returns true or false
 };
+
 UserSchema.methods.generateAccessToken = function () {
   // generate access token
   return jwt.sign(
@@ -77,6 +79,8 @@ UserSchema.methods.generateAccessToken = function () {
     { expiresIn: process.env.ACCESS_TOKEN_EXPIRY }
   );
 };
+
+
 UserSchema.methods.generateRefreshToken = function () {
   // generate refresh token
   return jwt.sign(
@@ -87,4 +91,5 @@ UserSchema.methods.generateRefreshToken = function () {
     { expiresIn: process.env.REFRESH_TOKEN_EXPIRY } // Corrected environment variable name (assuming it's REFRESH_TOKEN_EXPIRY)
   );
 };
+
 export const User = mongoose.model("User", UserSchema);
