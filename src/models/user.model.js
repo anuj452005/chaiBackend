@@ -25,6 +25,10 @@ const UserSchema = new Schema(
       trim: true,
       index: true, // Create an index on the field for faster querying
     },
+     password: {
+      type: String,
+      required: [true, "Password is required"], // Password is required
+    },
     avatar: {
       type: String, // Cloudinary URL for the avatar image
       required: true,
@@ -38,10 +42,7 @@ const UserSchema = new Schema(
         ref: "Video", // Reference to the Vedio model
       },
     ],
-    password: {
-      type: String,
-      required: [true, "Password is required"], // Password is required
-    },
+   
     refreshToken: {
       type: String,
     },
