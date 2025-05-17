@@ -16,12 +16,14 @@ app.use(cookieParser());
 
 //routes import
 import userRouter from "./routes/user.routes.js";
+import playlistRouter from "./routes/playlist.routes.js";
+import videoRouter from "./routes/video.routes.js";
 
 
 
 //routes declaration
-app.use("/api/v1/users",userRouter); //URL_ADDRESS:8000/user ke badde userRouter ka code chalega aur uske andar wale routes bhi chalega like /register , /login etc.
-
-
+app.use("/api/v1/users",userRouter);
+app.use("/api/v1/playlists",playlistRouter);
+app.use("/api/v1/videos",videoRouter);
 
 export {app};
